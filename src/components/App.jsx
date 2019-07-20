@@ -1,11 +1,23 @@
 import React from 'react';
 
-function App() {
+import Navbar from './Navbar';
+
+const App = () => {
+  const leftItems = [
+    { as: 'a', content: 'Home', key: 'home' },
+    { as: 'a', content: 'Users', key: 'users' }
+  ];
+  const rightItems = [
+    { as: 'a', content: 'Login', key: 'login' },
+    { as: 'a', content: 'Register', key: 'register' }
+  ];
   return (
     <div className="App">
-      <h1>fetchDoggo</h1>
+      <Navbar leftItems={leftItems} rightItems={rightItems}>
+        <h1>fetchDoggo</h1>
+      </Navbar>
     </div>
   );
-}
+};
 
 export default App;
