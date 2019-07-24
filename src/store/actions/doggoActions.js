@@ -1,18 +1,24 @@
 import axios from 'axios';
 
-const DOGGO_API_BASE_URL = 'https://dog.ceo/api/breed/';
+const DOGGO_API_BASE_URL = 'https://dog.ceo/api/';
 
-const fetchDoggos = () => {
+export const fetchRandomDoggos = dogs => {
+  let numberOfDogs = 1;
+
+  if (dogs > 1) {
+    numberOfDogs = dogs;
+  }
+
   const actionDispatch = async dispatch => {
     try {
       dispatch({ type: 'FETCH_DOGGOS' });
 
-      const response = await axios.get(`${DOGGO_API_BASE_URL}`);
-      const { results } = await response.data;
+      const response = await axios.get(`${DOGGO_API_BASE_URL}breeds/image/random/${numberOfDogs}`);
+      const { message } = await response.data;
 
       dispatch({
         type: 'FETCH_DOGGOS_SUCCESSFUL',
-        payload: results
+        payload: message
       });
     } catch (err) {
       dispatch({
@@ -20,9 +26,10 @@ const fetchDoggos = () => {
         payload: err
       });
     }
-
-    return actionDispatch;
   };
+  return actionDispatch;
 };
 
-export default fetchDoggos;
+export const fetchBreeds = () => {
+  console.log('fetch breeds');
+};
