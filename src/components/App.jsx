@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Navbar from './Navbar';
+import DogListContainer from './DogListContainer';
 
 const App = () => {
   const leftItems = [
@@ -15,6 +16,7 @@ const App = () => {
     <div className="App">
       <Navbar leftItems={leftItems} rightItems={rightItems}>
         <h1>fetchDoggo</h1>
+        <DogListContainer />
       </Navbar>
     </div>
   );
