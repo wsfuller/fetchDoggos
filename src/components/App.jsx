@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Container, Divider } from 'semantic-ui-react';
 
 import Navbar from './Navbar';
 import SearchForm from './SearchForm';
 import DogListContainer from './DogListContainer';
+import Footer from './Footer';
 
 const App = () => {
   return (
-    <div className="App">
+    <Fragment>
       <Navbar />
       <Container>
         <SearchForm />
         <Divider />
         <DogListContainer />
       </Container>
-    </div>
+      <Footer />
+    </Fragment>
   );
 };
 
