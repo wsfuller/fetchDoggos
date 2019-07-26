@@ -16,7 +16,7 @@ class DogListContainer extends Component {
 
   componentDidMount() {
     const { FETCH_RANDOM_DOGGOS } = this.props;
-    FETCH_RANDOM_DOGGOS(2);
+    FETCH_RANDOM_DOGGOS();
   }
 
   render() {
