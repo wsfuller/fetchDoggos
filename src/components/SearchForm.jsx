@@ -12,10 +12,13 @@ class DoggoSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      numberOfDoggos: 1,
+      numberOfDoggosError: false,
       breed: '',
       subBreed: ''
     };
-    this.handleBreedSelectChange = this.handleBreedSelectChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -24,70 +27,89 @@ class DoggoSearch extends Component {
     FETCH_BREEDS();
   }
 
-  handleBreedSelectChange = (e, { value }) => {
-    const { FETCH_SUB_BREEDS, BREEDS } = this.props;
-    this.setState({ breed: value }, () =>
-      FETCH_SUB_BREEDS(value)
-        .then(() => {
-          if (BREEDS.subBreeds.length > 0) {
-            return this.setState({ hasSubBreed: true });
-          }
-        })
-        .catch(err => console.log('something bad happened: ', err))
-    );
+  handleChange = e => {
+    const { numberOfDoggosError } = this.state;
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if (name === 'numberOfDoggos') {
+      if (value < 1 || value > 10) {
+        this.setState({ [name]: value, numberOfDoggosError: true });
+      } else {
+        this.setState({ [name]: value, numberOfDoggosError: false });
+      }
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
-  handleSubBreedSelectChange = (e, { value }) => {
-    this.setState({ subBreed: value });
+  handleSelectChange = (e, { name, value }) => {
+    const { FETCH_SUB_BREEDS, BREEDS } = this.props;
+
+    if (name === 'breed') {
+      this.setState({ [name]: value, subBreed: '' }, () => {
+        FETCH_SUB_BREEDS(value)
+          .then(() => {
+            if (BREEDS.subBreeds.length > 0) {
+              return this.setState({ hasSubBreed: true });
+            }
+          })
+          .catch(err => console.log('something bad happened: ', err));
+      });
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { FETCH_DOGGOS } = this.props;
-    const { breed, subBreed } = this.state;
-    console.log('get some doggos: ', e);
-    console.log('breed: ', this.state.breed);
-    console.log('subbreed: ', this.state.subBreed);
-    FETCH_DOGGOS(breed, subBreed);
+    const { numberOfDoggos, breed, subBreed } = this.state;
+    FETCH_DOGGOS(numberOfDoggos, breed, subBreed);
   };
 
   render() {
-    console.log('this state: ', this.state);
     const {
       BREEDS: { breeds, subBreeds }
     } = this.props;
 
-    const { breed, subBreed } = this.state;
+    const { numberOfDoggos, numberOfDoggosError, breed } = this.state;
     return (
       <Form>
         <h1>Doggo Search</h1>
         <Form.Group widths="equal">
           <Form.Field
+            name="numberOfDoggos"
             label="Number of Doggos"
             placeholder="Up to 10"
             control="input"
             type="number"
+            value={numberOfDoggos}
             min={1}
             max={10}
+            onChange={this.handleChange}
+            error={numberOfDoggosError}
           />
           <Form.Field
+            name="breed"
             control={Select}
             label="By Breed"
             options={breeds}
             value={breed}
-            onChange={this.handleBreedSelectChange}
+            onChange={this.handleSelectChange}
           />
           <Form.Field
+            name="subBreed"
             control={Select}
             label="Sub-Breed"
             options={subBreeds}
             disabled={!subBreeds.length}
-            onChange={this.handleSubBreedSelectChange}
+            onChange={this.handleSelectChange}
           />
           <Form.Field
             label="Fetch Doggos"
             control={Button}
-            disabled={!breed}
+            disabled={!breed || numberOfDoggosError}
             onClick={this.handleSubmit}
           >
             Submit

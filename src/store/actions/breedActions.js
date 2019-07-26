@@ -36,7 +36,6 @@ export const fetchBreeds = () => {
 };
 
 export const fetchSubBreeds = breed => {
-  console.log('fetch sub breeds breh: ', breed);
   const subBreeds = [];
   const actionDispatch = async dispatch => {
     try {
@@ -44,6 +43,12 @@ export const fetchSubBreeds = breed => {
 
       const response = await axios.get(`${DOGGO_API_BASE_URL}breed/${breed}/list`);
       const { message } = await response.data;
+
+      subBreeds.push({
+        key: 'blank',
+        text: '-',
+        value: ''
+      });
 
       collection.forEach(message, value => {
         subBreeds.push({

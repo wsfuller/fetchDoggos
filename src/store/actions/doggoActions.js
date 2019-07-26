@@ -30,23 +30,16 @@ export const fetchRandomDoggos = dogs => {
   return actionDispatch;
 };
 
-export const fetchDoggos = (breed, subBreed) => {
-  console.log('fetch dogs numberOfDoggos: ', breed);
-  console.log('fetch dogs numberOfDoggos: ', subBreed);
-
-  let hasSubBreed;
-
-  if (subBreed) {
-    hasSubBreed = `/${subBreed}`;
-  } else {
-    hasSubBreed = null;
-  }
-
+export const fetchDoggos = (numberOfDoggos, breed, subBreed) => {
   const actionDispatch = async dispatch => {
     try {
       dispatch({ type: 'FETCH_DOGGOS' });
 
-      const response = await axios.get(`${DOGGO_API_BASE_URL}breed/${breed}${hasSubBreed}/images/`);
+      const response = await axios.get(
+        `${DOGGO_API_BASE_URL}breed/${breed}${
+          subBreed ? `/${subBreed}` : ''
+        }/images/random/${numberOfDoggos}`
+      );
       const { message } = await response.data;
 
       dispatch({
