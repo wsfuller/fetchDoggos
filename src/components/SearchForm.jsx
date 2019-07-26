@@ -33,9 +33,8 @@ class DoggoSearch extends Component {
     FETCH_BREEDS();
   }
 
-  handleChange = e => {
-    const name = e.target.name;
-    const value = e.target.value;
+  handleChange(e) {
+    const { name, value } = e.target;
 
     if (name === 'numberOfDoggos') {
       if (value < 1 || value > 10) {
@@ -46,9 +45,9 @@ class DoggoSearch extends Component {
     } else {
       this.setState({ [name]: value });
     }
-  };
+  }
 
-  handleSelectChange = (e, { name, value }) => {
+  handleSelectChange(e, { name, value }) {
     const { FETCH_SUB_BREEDS, BREEDS } = this.props;
 
     if (name === 'breed') {
@@ -64,14 +63,14 @@ class DoggoSearch extends Component {
     } else {
       this.setState({ [name]: value });
     }
-  };
+  }
 
-  handleSubmit = e => {
+  handleSubmit(e) {
     e.preventDefault();
     const { FETCH_DOGGOS } = this.props;
     const { numberOfDoggos, breed, subBreed } = this.state;
     FETCH_DOGGOS(numberOfDoggos, breed, subBreed);
-  };
+  }
 
   render() {
     const {
@@ -85,7 +84,7 @@ class DoggoSearch extends Component {
         <Form.Group widths="equal">
           <Form.Field
             name="numberOfDoggos"
-            label="Number of Doggos"
+            label="Number of Doggos (1 - 10)"
             placeholder="Up to 10"
             control="input"
             type="number"
