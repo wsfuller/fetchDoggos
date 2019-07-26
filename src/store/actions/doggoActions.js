@@ -30,6 +30,6 @@ export const fetchRandomDoggos = dogs => {
   return actionDispatch;
 };
 
-export const fetchBreeds = () => {
-  console.log('fetch breeds');
+export const fetchDoggos = () => {
+  console.log('fetch dogs');
 };

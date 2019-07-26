@@ -7,23 +7,16 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 import { fetchRandomDoggos } from '../store/actions/doggoActions';
 import DogList from './DogList';
-import RandomButton from './Search/RandomButton';
 
 class DogListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.singleRandomDoggo = this.singleRandomDoggo.bind(this);
   }
 
   componentDidMount() {
     const { FETCH_RANDOM_DOGGOS } = this.props;
     FETCH_RANDOM_DOGGOS(2);
-  }
-
-  singleRandomDoggo() {
-    const { FETCH_RANDOM_DOGGOS } = this.props;
-    FETCH_RANDOM_DOGGOS(1);
   }
 
   render() {
@@ -44,12 +37,7 @@ class DogListContainer extends Component {
       content = <DogList doggos={doggos} />;
     }
 
-    return (
-      <div>
-        <RandomButton randomDoggo={this.singleRandomDoggo} />
-        {content}
-      </div>
-    );
+    return content;
   }
 }
 
