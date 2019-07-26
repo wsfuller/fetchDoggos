@@ -28,7 +28,6 @@ class DoggoSearch extends Component {
   }
 
   handleChange = e => {
-    const { numberOfDoggosError } = this.state;
     const name = e.target.name;
     const value = e.target.value;
 
