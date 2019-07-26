@@ -7,7 +7,7 @@ import logo from '../assets/images/wsf-logo.svg';
 
 const StyledFooter = styled.footer`
   margin-top: 5rem;
-  padding: 3rem 1rem;
+  padding: 8rem 1rem;
   background: #212121;
 `;
 
