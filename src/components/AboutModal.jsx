@@ -4,6 +4,12 @@ import styled from 'styled-components';
 import { Header, Image, Menu, Modal } from 'semantic-ui-react';
 
 import Remy from '../assets/images/remy.png';
+import Remy2x from '../assets/images/remy@2x.png';
+
+const StyledImage = styled(Image)`
+  width: 10.375rem;
+  height: 10.375rem;
+`;
 
 const StyledLink = styled.a`
   margin: 0 0.25rem;
@@ -11,10 +17,17 @@ const StyledLink = styled.a`
 
 const AboutModal = () => (
   <Menu inverted>
-    <Modal trigger={<Menu.Item>About</Menu.Item>}>
+    <Modal closeIcon trigger={<Menu.Item>About</Menu.Item>}>
       <Modal.Header>About FetchDoggos</Modal.Header>
       <Modal.Content image>
-        <Image wrapped size="medium" src={Remy} />
+        <StyledImage
+          wrapped
+          rounded
+          size="medium"
+          src={Remy}
+          srcSet={`${Remy2x} 2x`}
+          alt="Illustration of Boston Terrier"
+        />
         <Modal.Description>
           <Header>Description</Header>
           <p>

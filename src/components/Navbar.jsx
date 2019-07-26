@@ -8,10 +8,19 @@ import RandomSearchButton from './RandomSearchButton';
 import AboutModal from './AboutModal';
 
 const StyledImage = styled(Image)`
-  margin-right: 0.5rem;
+  @media screen and (min-width: 500px) {
+    margin-right: 0.5rem;
+  }
 `;
 
-const Navbar = ({ item }) => {
+const StyledParagraph = styled.p`
+  display: none;
+  @media screen and (min-width: 500px) {
+    display: block;
+  }
+`;
+
+const Navbar = () => {
   const rightLink = (
     <Menu.Item>
       <RandomSearchButton />
@@ -22,7 +31,7 @@ const Navbar = ({ item }) => {
     <Menu inverted>
       <Menu.Item>
         <StyledImage size="mini" src={Logo} />
-        FetchDoggos
+        <StyledParagraph>FetchDoggos</StyledParagraph>
       </Menu.Item>
       <AboutModal />
       <Menu.Menu position="right">
