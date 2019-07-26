@@ -57,6 +57,7 @@ class DoggoSearch extends Component {
             if (BREEDS.subBreeds.length > 0) {
               return this.setState({ hasSubBreed: true });
             }
+            return false;
           })
           .catch(err => console.log('something bad happened: ', err));
       });
