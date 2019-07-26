@@ -1,17 +1,25 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import { Card } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
+
+const StyledImage = styled(Image)`
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+`;
 
 const DogList = ({ doggos }) => {
   return (
     <Fragment>
       <h1>Doggo Results</h1>
-      <Card.Group itemsPerRow={4}>
+      <Grid stackable>
         {doggos.map(doggo => (
-          <Card raised key={doggo} image={doggo} />
+          <Grid.Column key={doggo} mobile={16} tablet={8} computer={4}>
+            <StyledImage fluid rounded src={doggo} />
+          </Grid.Column>
         ))}
-      </Card.Group>
+      </Grid>
     </Fragment>
   );
 };
