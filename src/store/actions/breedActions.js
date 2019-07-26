@@ -44,19 +44,21 @@ export const fetchSubBreeds = breed => {
       const response = await axios.get(`${DOGGO_API_BASE_URL}breed/${breed}/list`);
       const { message } = await response.data;
 
-      subBreeds.push({
-        key: 'blank',
-        text: '-',
-        value: ''
-      });
-
-      collection.forEach(message, value => {
+      if (message.length > 1) {
         subBreeds.push({
-          key: value,
-          text: `${value.charAt(0).toUpperCase() + value.slice(1)}`,
-          value
+          key: 'blank',
+          text: '-',
+          value: ''
         });
-      });
+
+        collection.forEach(message, value => {
+          subBreeds.push({
+            key: value,
+            text: `${value.charAt(0).toUpperCase() + value.slice(1)}`,
+            value
+          });
+        });
+      }
 
       dispatch({
         type: 'FETCH_SUB_BREEDS_SUCCESSFUL',
