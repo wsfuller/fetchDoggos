@@ -16,7 +16,9 @@ const options = [
 class DoggoSearch extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      subBreed: false
+    };
   }
 
   componentDidMount() {
@@ -28,6 +30,8 @@ class DoggoSearch extends Component {
     const {
       BREEDS: { breeds }
     } = this.props;
+
+    const { subBreed } = this.state;
     return (
       <Form>
         <h1>Doggo Search</h1>
@@ -41,7 +45,7 @@ class DoggoSearch extends Component {
             max={10}
           />
           <Form.Field control={Select} label="By Breed" options={breeds} />
-          <Form.Field control={Select} label="Sub Breed" options={options} />
+          <Form.Field control={Select} label="Sub Breed" options={options} disabled={!subBreed} />
         </Form.Group>
       </Form>
     );
