@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
 import { Form, Select, Button } from 'semantic-ui-react';
 
 import { fetchDoggos } from '../store/actions/doggoActions';
 import { fetchBreeds, fetchSubBreeds } from '../store/actions/breedActions';
+
+const StyledH1 = styled.h1`
+  margin: 1rem auto !important;
+  text-align: center;
+`;
 
 class DoggoSearch extends Component {
   constructor(props) {
@@ -75,7 +81,7 @@ class DoggoSearch extends Component {
     const { numberOfDoggos, numberOfDoggosError, breed } = this.state;
     return (
       <Form>
-        <h1>Doggo Search</h1>
+        <StyledH1>Doggo Search</StyledH1>
         <Form.Group widths="equal">
           <Form.Field
             name="numberOfDoggos"
