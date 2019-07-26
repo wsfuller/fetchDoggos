@@ -2,12 +2,8 @@ import axios from 'axios';
 
 const DOGGO_API_BASE_URL = 'https://dog.ceo/api/';
 
-export const fetchRandomDoggos = dogs => {
-  let numberOfDogs = 1;
-
-  if (dogs > 1) {
-    numberOfDogs = dogs;
-  }
+export const fetchRandomDoggos = () => {
+  const numberOfDogs = Math.floor(Math.random() * 10 + 1);
 
   const actionDispatch = async dispatch => {
     try {
