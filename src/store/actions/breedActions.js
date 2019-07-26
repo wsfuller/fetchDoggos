@@ -4,8 +4,6 @@ import collection from 'lodash/collection';
 const DOGGO_API_BASE_URL = 'https://dog.ceo/api/';
 
 export const fetchBreeds = () => {
-  console.log('fetch breeds');
-
   const breeds = [];
 
   const actionDispatch = async dispatch => {
@@ -37,12 +35,34 @@ export const fetchBreeds = () => {
   return actionDispatch;
 };
 
-export const fetchSubBreeds = () => {
-  console.log('fetch sub breeds');
-};
+export const fetchSubBreeds = breed => {
+  console.log('fetch sub breeds breh: ', breed);
+  const subBreeds = [];
+  const actionDispatch = async dispatch => {
+    try {
+      dispatch({ type: 'FETCH_SUB_BREEDS' });
 
-const options = [
-  { key: 'm', text: 'Affenpinscher', value: 'affenpinscher' },
-  { key: 'f', text: 'African', value: 'african' },
-  { key: 'o', text: 'Airedale', value: 'airedale' }
-];
+      const response = await axios.get(`${DOGGO_API_BASE_URL}breed/${breed}/list`);
+      const { message } = await response.data;
+
+      collection.forEach(message, value => {
+        subBreeds.push({
+          key: value,
+          text: `${value.charAt(0).toUpperCase() + value.slice(1)}`,
+          value
+        });
+      });
+
+      dispatch({
+        type: 'FETCH_SUB_BREEDS_SUCCESSFUL',
+        payload: subBreeds
+      });
+    } catch (err) {
+      dispatch({
+        type: 'FETCH_SUB_BREEDS_FAILED',
+        payload: err
+      });
+    }
+  };
+  return actionDispatch;
+};

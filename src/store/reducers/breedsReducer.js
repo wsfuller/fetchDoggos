@@ -34,6 +34,31 @@ export default function reducer(state = initialState, action) {
         errorMessage: String(action.payload)
       };
     }
+    case 'FETCH_SUB_BREEDS': {
+      return {
+        ...state,
+        fetching: true,
+        subBreeds: [],
+        error: false
+      };
+    }
+    case 'FETCH_SUB_BREEDS_SUCCESSFUL': {
+      return {
+        ...state,
+        fetching: false,
+        error: false,
+        errorMessage: '',
+        subBreeds: action.payload
+      };
+    }
+    case 'FETCH_SUB_BREEDS_FAILED': {
+      return {
+        ...state,
+        fetching: false,
+        error: true,
+        errorMessage: String(action.payload)
+      };
+    }
     default: {
       return {
         ...state
