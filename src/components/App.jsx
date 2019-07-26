@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Navbar from './Navbar';
+import RandomSearchButton from './RandomSearchButton';
+import SearchForm from './SearchForm';
 import DogListContainer from './DogListContainer';
 
 const App = () => {
@@ -15,7 +17,9 @@ const App = () => {
   return (
     <div className="App">
       <Navbar leftItems={leftItems} rightItems={rightItems}>
-        <h1>fetchDoggo</h1>
+        <h1>fetchDoggos</h1>
+        <RandomSearchButton />
+        <SearchForm />
         <DogListContainer />
       </Navbar>
     </div>
