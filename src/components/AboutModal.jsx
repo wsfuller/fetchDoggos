@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Header, Image, Menu, Modal } from 'semantic-ui-react';
+import { Header, Icon, Image, Menu, Modal } from 'semantic-ui-react';
 
 import Remy from '../assets/images/remy.png';
 import Remy2x from '../assets/images/remy@2x.png';
@@ -46,6 +46,9 @@ const AboutModal = () => (
             FetchDoggos is built using React, Redux, Semantic UI React, Styled Components, GitHub,
             and Netlify.
           </p>
+          <a href="https://github.com/wsfuller/fetchDoggos">
+            <Icon name="github" size="big" />
+          </a>
         </Modal.Description>
       </Modal.Content>
     </Modal>
