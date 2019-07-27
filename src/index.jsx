@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import ReactGA from 'react-ga';
 
 import 'semantic-ui-css/semantic.min.css';
+
 import App from './components/App';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
+
+ReactGA.initialize([{ trackingId: 'UA-33461307-9' }], {
+  debug: true,
+  alwaysSendToDefaultTracker: false
+});
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 ReactDOM.render(
   <Provider store={store}>
