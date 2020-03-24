@@ -55,7 +55,7 @@ const Footer = () => {
       <Container>
         <StyledFooterContent>
           <StyledBranding
-            href="https://williamsfuller.com"
+            href="https://wsfuller.dev"
             // eslint-disable-next-line react/jsx-no-target-blank
             target="_blank"
             rel="noopener"
